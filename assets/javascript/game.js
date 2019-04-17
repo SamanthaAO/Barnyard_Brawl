@@ -68,7 +68,7 @@ $(document).ready(function() {
                 yourCharacter = i;
         $('#begin').prepend("<h1>Future Oponents:</h1>");
             //create attack button
-            $('#ycDiv').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button>")
+            $('#attackBox').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button><br>")
             $('.attackBtn').on("click", function() {
                 
                 
