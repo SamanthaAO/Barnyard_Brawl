@@ -5,5 +5,9 @@
 } */
 
 .yc {
-    color: green;
+    background-color: green;
+}
+
+.enemy {
+    background-color: red;
 }

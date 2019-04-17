@@ -59,6 +59,7 @@ $(document).ready(function() {
         if(yourCharacter === "" && enemy === ""){
         $('#ycDiv').append("<h1>Your Character:</h1>");
         $('#ycDiv').append(this);
+        $(this).addClass('yc');
             var i = $(this).val();
                 ycHealth = characters[i].health;
                 ycInitialAttack = characters[i].initialAttack;
@@ -77,6 +78,7 @@ $(document).ready(function() {
         else if(enemy ===""){
             $('#enemyDiv').append("<h1>Current Oponent:</h1>");
             $('#enemyDiv').append(this); 
+            $(this).addClass('enemy');
                 var i = $(this).val();
                     enemyHealth = characters[i].health;
                     enemyDefense = characters[i].defense;
@@ -84,32 +86,39 @@ $(document).ready(function() {
                         console.log(enemyHealth);
                         console.log(ycHealth);
         
-        $('#ycDiv').append("<button type='button' class='btn btn-danger' id='attackButton'>Attack</button>")
-        }
-    })
-
-    $(".attackButton").on("click", function() {
-        console.log(enemyHealth);
-        console.log(ycHealth);
+        $('#ycDiv').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button>")
+            $('.attackBtn').on("click", function() {
+                
+                
+                if(ycHealth >= 0 && enemyHealth >= 0){
+                    enemyHealth = enemyHealth - ycAttack;
+                    ycHealth = ycHealth - enemyDefense;
+                    ycAttack = ycInitialAttack + ycAttack;
         
-        if(ycHealth >= 0 && enemyHealth >= 0){
-            enemyHealth = enemyHealth - ycInitialAttack;
-            ycHealth = ycHealth - enemyDefense;
-            ycAttack = ycInitialAttack + ycAttack;
-
-                console.log(enemyHealth); 
-                console.log(ycHealth);
-                console.log(ycAttack);
-        }
-        else if (enemyHealth <=0){
-
-        }
-        else{
-
-        }
-
-
+                        console.log(enemyHealth); 
+                        console.log(ycHealth);
+                        console.log(ycAttack);
+                }
+                else if (enemyHealth <=0){
+                    // display you lose and get rid of enemy
+        
+                }
+                else{
+        
+                }
+        
+        
+            })
+            }
     })
+
+    // https://www.codewall.co.uk/jquery-on-click-function-not-working-after-appending-html/  <- use this to fix button problem
+    
+    //also use code from page to fix health problem!!!!
+
+    //celebrate
+
+   
 
   
 
