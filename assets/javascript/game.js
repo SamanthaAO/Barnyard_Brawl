@@ -64,8 +64,43 @@ $(document).ready(function() {
                 ycHealth = characters[i].health;
                 ycInitialAttack = characters[i].initialAttack;
                 ycAttack = ycInitialAttack;
+                ycName = characters[i].name;
                 yourCharacter = i;
         $('#begin').prepend("<h1>Future Oponents:</h1>");
+            //create attack button
+            $('#ycDiv').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button>")
+            $('.attackBtn').on("click", function() {
+                
+                
+                if(ycHealth >= 0 && enemyHealth >= 0){
+                    enemyHealth = enemyHealth - ycAttack;
+                    ycHealth = ycHealth - enemyDefense;
+                    ycAttack = ycInitialAttack + ycAttack;
+
+                    $('#narration').text("You attacked " + enemyName + " for " + ycAttack + " damage. " + enemyName + 
+                    " attacked back for " + enemyDefense + " damage." );
+
+        
+                        console.log(enemyHealth); 
+                        console.log(ycHealth);
+                        console.log(ycAttack);
+                }
+                else if (enemyHealth <=0){
+                    $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent." );
+                    $('#enemyDiv').empty(); 
+                    enemy = "";
+        
+                }
+                else{
+                    $('#narration').text("You have been defeated :(");
+                    $('#ycDiv').empty();  
+
+                    //create restart button here
+        
+                }
+        
+        
+            })
         
  
         //checks
@@ -82,39 +117,21 @@ $(document).ready(function() {
                 var i = $(this).val();
                     enemyHealth = characters[i].health;
                     enemyDefense = characters[i].defense;
+                    enemyName = characters[i].name;
                     enemy = i;
                         console.log(enemyHealth);
                         console.log(ycHealth);
         
-        $('#ycDiv').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button>")
-            $('.attackBtn').on("click", function() {
-                
-                
-                if(ycHealth >= 0 && enemyHealth >= 0){
-                    enemyHealth = enemyHealth - ycAttack;
-                    ycHealth = ycHealth - enemyDefense;
-                    ycAttack = ycInitialAttack + ycAttack;
         
-                        console.log(enemyHealth); 
-                        console.log(ycHealth);
-                        console.log(ycAttack);
-                }
-                else if (enemyHealth <=0){
-                    // display you lose and get rid of enemy
-        
-                }
-                else{
-        
-                }
-        
-        
-            })
             }
     })
 
-    // https://www.codewall.co.uk/jquery-on-click-function-not-working-after-appending-html/  <- use this to fix button problem
+    
     
     //also use code from page to fix health problem!!!!
+//document.querySelector('#current-' + activePlayer).textContent = roundScore
+
+// store i as variable (like activePlayer in this text)
 
     //celebrate
 
