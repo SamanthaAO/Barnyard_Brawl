@@ -18,7 +18,7 @@ $(document).ready(function() {
             initialAttack: 5,
             defense: 7,
             health: 160,
-            image: "<img src='assets/images/goat.jpg' alt='goat' width='150' height='150'>",
+            image: "assets/images/goat.jpg",
         },
     
         cow = {
@@ -26,7 +26,7 @@ $(document).ready(function() {
             initialAttack: 10,
             defense: 5,
             health: 200,
-            image: "<img src='assets/images/cow.jpg' alt='cow' width='150' height='150'>",
+            image: "assets/images/cow.jpg",
         },
     
         sheep = {
@@ -34,7 +34,7 @@ $(document).ready(function() {
             initialAttack: 4,
             defense: 6,
             health: 180,
-            image: "<img src='assets/images/sheep.jpg' alt='sheep' width='150' height='150'>",
+            image: "assets/images/sheep.jpg",
         },
     
         pig = {
@@ -42,25 +42,46 @@ $(document).ready(function() {
             initialAttack: 8,
             defense: 9,
             health: 210,
-            image: "<img src='assets/images/pig.jpg' alt='pig' width='150' height='150'>",
+            image: "assets/images/pig.jpg",
         },
     ];
     
+    //create cards
+
+    var cardInit = 0;
+
+var cards = function(character) {
+    var newCard = $('<div></div>').addClass('card btn character').attr("style", 'width: 15rem;').attr("fighterNum", cardInit);
+    var name = $('<h5></<h5>').text(character.name).addClass('card-title');
+    var image = $('<img/>').attr("src", character.image).addClass('card-img-top');
+    var body = $('<div></div>').addClass('card-body');
+    var text = $('<p></p>').text(character.health + " HP").addClass('card-text');
+    $('.mainSelection').append(newCard);
+    $(`[fighterNum=${cardInit}]`).append(name, image, body, text);
+    // $('[fighterNum=cardInit]')
+
+    cardInit++;
+
+};
+for (var i = 0; i < characters.length; i++) {
+    cards(characters[i]);
+}
+
     
     
     
-    // console.log(characters[1].defense);
 
     //start all character tiles in the begining div
-    $("#begin").append($(".characterTile"));
+    $(".mainSelection").append(cards);
 
-    $(".characterTile").on("click", function() {
+    $(".character").on("click", function() {
         //assign yc
         if(yourCharacter === "" && enemy === ""){
         $('#ycDiv').append("<h1>Your Character:</h1>");
         $('#ycDiv').append(this);
         $(this).addClass('yc');
-            var i = $(this).val();
+            var i = this.getAttribute("fighterNum");
+            console.log($(this).fighterNum());
                 ycHealth = characters[i].health;
                 ycInitialAttack = characters[i].initialAttack;
                 ycAttack = ycInitialAttack;
@@ -114,7 +135,7 @@ $(document).ready(function() {
             $('#enemyDiv').append("<h1>Current Oponent:</h1>");
             $('#enemyDiv').append(this); 
             $(this).addClass('enemy');
-                var i = $(this).val();
+                var i = $(this).fighterNum();
                     enemyHealth = characters[i].health;
                     enemyDefense = characters[i].defense;
                     enemyName = characters[i].name;
