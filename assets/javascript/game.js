@@ -44,14 +44,19 @@ $(document).ready(function() {
             image: "<img src='assets/images/pig.jpg' alt='pig' width='150' height='150'>",
         },
     ];
-    
-    
-    
-    
+    function health(){
+    for(var j=0; j<characters.length; j++){
+    $(".card-footer" +j).text(characters[j].health + "HP");
+    }
+    }
+    health();
+
     // console.log(characters[1].defense);
 
     //start all character tiles in the begining div
     $("#begin").append($(".characterTile"));
+
+    var j = undefined;
 
     $(".characterTile").on("click", function() {
         //assign yc
@@ -74,18 +79,24 @@ $(document).ready(function() {
                 if(ycHealth >= 0 && enemyHealth >= 0){
                     enemyHealth = enemyHealth - ycAttack;
                     ycHealth = ycHealth - enemyDefense;
-                    ycAttack = ycInitialAttack + ycAttack;
 
                     $('#narration').text("You attacked " + enemyName + " for " + ycAttack + " damage. " + enemyName + 
                     " attacked back for " + enemyDefense + " damage." );
 
-        
-                        console.log(enemyHealth); 
+
+                    ycAttack = ycInitialAttack + ycAttack;
+                    $(".card-footer" +yourCharacter).text(ycHealth + "HP");
+                    $(".card-footer" + enemy).text(enemyHealth + "HP");
                         console.log(ycHealth);
-                        console.log(ycAttack);
+                        console.log(enemyHealth);
+                    
+                    
+
+                    
+
                 }
                 else if (enemyHealth <=0){
-                    $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent." );
+                    $('#narration').text("You have defeated " + enemyName + "!!! Select your next oponent." );
                     $('#enemyDiv').empty(); 
                     enemy = "";
         
@@ -104,22 +115,19 @@ $(document).ready(function() {
  
         //checks
         //  indexValue = parseInt(indexValue);  <- this might need to be used if issues with subtrracting later down the line. 
-        console.log(i); 
-        console.log(ycHealth);
-        console.log(ycInitialAttack);
+        
         }
         //assign enemy 
         else if(enemy ===""){
             $('#enemyDiv').append("<h1>Current Oponent:</h1>");
             $('#enemyDiv').append(this); 
             $(this).addClass('enemy');
-                var i = $(this).val();
-                    enemyHealth = characters[i].health;
-                    enemyDefense = characters[i].defense;
-                    enemyName = characters[i].name;
-                    enemy = i;
-                        console.log(enemyHealth);
-                        console.log(ycHealth);
+                var j = $(this).val();
+                    enemyHealth = characters[j].health;
+                    enemyDefense = characters[j].defense;
+                    enemyName = characters[j].name;
+                    enemy = j;
+                        
         
         
             }
@@ -127,12 +135,6 @@ $(document).ready(function() {
 
     
     
-    //also use code from page to fix health problem!!!!
-//document.querySelector('#current-' + activePlayer).textContent = roundScore
-
-// store i as variable (like activePlayer in this text)
-
-    //celebrate
 
    
 
