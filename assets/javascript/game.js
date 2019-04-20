@@ -9,6 +9,7 @@ $(document).ready(function() {
     var ycAttack = 0;
     var enemyHealth ="";
     var enemyDefense ="";
+    var enemyCounter = 0;
 
 
     var characters = [
@@ -55,8 +56,9 @@ $(document).ready(function() {
 
     //start all character tiles in the begining div
     $("#begin").append($(".characterTile"));
+    $("#restartBox").text("Click on the character that you would like to play as first. Then click to select your first opponent. CHOOSE WISELY!")
 
-    var j = undefined;
+    
 
     $(".characterTile").on("click", function() {
         //assign yc
@@ -70,8 +72,16 @@ $(document).ready(function() {
                 ycAttack = ycInitialAttack;
                 ycName = characters[i].name;
                 yourCharacter = i;
-        $('#begin').prepend("<h1>Future Oponents:</h1>");
-            //create attack button
+        $('#begin').prepend("<h1>Future Opponents:</h1>");
+            
+        //create restart button
+            $("#restartBox").empty();
+            $('#restartBox').append("<button type='button' class='btn btn-danger restartBtn'>New Game</button><br>")
+            $('.restartBtn').click( function() {
+                location.reload();
+            });
+
+            // create attack button
             $('#attackBox').append("<button type='button' class='btn btn-danger attackBtn'>Attack</button><br>")
             $('.attackBtn').on("click", function() {
                 
@@ -90,22 +100,30 @@ $(document).ready(function() {
                         console.log(ycHealth);
                         console.log(enemyHealth);
                     
-                    
-
+                        if (enemyHealth <=0){
+                            $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent." );
+                            $('#enemyDiv').empty(); 
+                            enemy = "";
+                        }
                     
 
                 }
                 else if (enemyHealth <=0){
-                    $('#narration').text("You have defeated " + enemyName + "!!! Select your next oponent." );
+                    $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent." );
                     $('#enemyDiv').empty(); 
+                    enemyCounter++;
                     enemy = "";
+                        // if (enemyCounter === characters.length-1){
+                        //     $("#begin").empty();
+                        //     $("#begin").text("You beat all possible opponents!!! Click new game to restart.");
+                        // }
         
                 }
                 else{
                     $('#narration').text("You have been defeated :(");
                     $('#ycDiv').empty();  
 
-                    //create restart button here
+                    
         
                 }
         
@@ -119,7 +137,7 @@ $(document).ready(function() {
         }
         //assign enemy 
         else if(enemy ===""){
-            $('#enemyDiv').append("<h1>Current Oponent:</h1>");
+            $('#enemyDiv').append("<h1>Current Opponent:</h1>");
             $('#enemyDiv').append(this); 
             $(this).addClass('enemy');
                 var j = $(this).val();
@@ -129,9 +147,15 @@ $(document).ready(function() {
                     enemy = j;
                         
         
+
+
+
+                    
         
             }
     })
+
+    
 
     
     
