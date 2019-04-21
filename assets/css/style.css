@@ -1,8 +1,40 @@
 
 /* this currently does not work */
-/* body {
-    background-image: url("assets/images/barn.png");
+body,html {
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+        1px 1px 0 #000;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* .bg {
+    background-image: url("../images/background.jpg");
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 } */
+
+h1 {
+    font-family: 'Black Ops One', cursive;
+    
+}
+
+#bigHeader {
+    font-size:80px;
+}
+#narration {
+font-size: 20px;
+}
+
+.characterTile {
+    color: black;
+}
 
 .yc {
     background-color: green;
@@ -11,3 +43,10 @@
 .enemy {
     background-color: red;
 }
+
+.card-header {
+    font-size: 30px;
+}
+
+
+

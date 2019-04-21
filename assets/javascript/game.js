@@ -11,7 +11,7 @@ $(document).ready(function () {
     var enemyDefense = "";
     var enemyCounter = 0;
 
-
+    //create array of objects to create tiles from
     var characters = [
         {
             name: "Goat",
@@ -43,11 +43,12 @@ $(document).ready(function () {
         },
     ];
 
+    //funtion to create character tiles
     function displayCharacters() {
         var html = "";
         characters.forEach(function (character, i) {
             var name = character.name.toLowerCase();
-            html += `<button class="characterTile" id="${name}Tile" value="${i}">
+            html += `<button class="characterTile mx-3 mt-3" id="${name}Tile" value="${i}">
                         <div class="card text-center">
                             <div class="card-header">
                             ${character.name}
@@ -56,10 +57,8 @@ $(document).ready(function () {
                             <div class="card-body">
                                 <img src="${character.image}" alt="${name}" width="150" height="150">
                             </div>
-
-                            <div class="card-footer${i}">
-                            Health
-                            </div>
+                            <div class="card-footer py-0"></div>
+                            ${character.health}HP
                         </div>
                     </button>`;
 
@@ -69,13 +68,7 @@ $(document).ready(function () {
     }
     displayCharacters();
 
-
-    function health() {
-        for (var j = 0; j < characters.length; j++) {
-            $(".card-footer" + j).text(characters[j].health + "HP");
-        }
-    }
-    health();
+   
 
     function fighterStats(isEnemy, obj){
         var div = (isEnemy) ? "#enemyDiv" : "#ycDiv";
@@ -153,11 +146,7 @@ $(document).ready(function () {
             console.log(ycHealth);
             console.log(enemyHealth);
 
-            // if (enemyHealth <= 0) {
-            //     $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent.");
-            //     $('#enemyDiv').empty();
-            //     enemy = "";
-            // }
+            
 
 
         }
@@ -165,39 +154,25 @@ $(document).ready(function () {
         //check to see if anyone has been defeated
         if (enemyHealth <= 0 && enemy !== "") {
 
-            $('#narration').text("You have defeated " + enemyName + "!!! Select your next opponent.");
+            $('#narration').html("You have defeated " + enemyName + "!!! <br> Select your next opponent.");
             $('#enemyDiv').empty();
+            $('#begin').append("<img src='assets/images/grave.png' alt='grave' width='150' height='150'></img>")
+            
             enemyCounter++;
             enemy = "";
             if (enemyCounter === characters.length-1){
                 $("#begin").empty();
-                $("#begin").text("You beat all possible opponents!!! Click new game to restart.");
+                $('#narration').empty();
+                $("#begin").html("You beat all possible opponents!!! <br> Click new game to restart.");
             }
         }
 
         else if(ycHealth <= 0  && enemy !== "" ) {
-            $('#narration').text("You have been defeated :(");
+            $('#narration').html("You have been defeated :( <br> Click new game to restart.");
             $('#ycDiv').empty(); 
         }
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })
 
