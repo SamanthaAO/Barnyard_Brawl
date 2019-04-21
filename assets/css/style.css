@@ -12,14 +12,6 @@ body,html {
     font-family: 'Oswald', sans-serif;
 }
 
-/* .bg {
-    background-image: url("../images/background.jpg");
-    height: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
-
 h1 {
     font-family: 'Black Ops One', cursive;
     
@@ -47,6 +39,7 @@ font-size: 20px;
 .card-header {
     font-size: 30px;
 }
+
 
 
 
